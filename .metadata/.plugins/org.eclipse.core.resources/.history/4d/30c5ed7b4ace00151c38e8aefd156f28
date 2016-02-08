@@ -1,5 +1,3 @@
-package test;
-
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
 
