@@ -9,8 +9,6 @@ public class Test {
 		// TODO Auto-generated method stub
 		LCD.drawString("Hello!", 0, 0);
 		Delay.msDelay(5000);
-		
-		//Hello Ville
 	}
 
 }
