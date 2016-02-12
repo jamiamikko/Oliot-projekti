@@ -1,0 +1,7 @@
+package motors;
+import sensor.EV3IRBeacon;
+import sensor.InfraredSignalCheckerThread;
+
+public class Motors {
+
+}

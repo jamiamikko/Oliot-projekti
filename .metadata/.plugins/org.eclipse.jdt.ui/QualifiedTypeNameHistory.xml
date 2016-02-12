@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="sensor.EV3IRBeacon"/>
+<fullyQualifiedTypeName name="sensor.InfraredSignalCheckerThread"/>
+<fullyQualifiedTypeName name="lejos.hardware.port.SensorPort"/>
+<fullyQualifiedTypeName name="lejos.hardware.lcd.LCD"/>
+<fullyQualifiedTypeName name="lejos.hardware.sensor.SensorModes"/>
+<fullyQualifiedTypeName name="lejos.hardware.sensor.EV3IRSensor"/>
+</qualifiedTypeNameHistroy>

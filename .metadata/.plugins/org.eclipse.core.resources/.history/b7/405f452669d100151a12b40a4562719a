@@ -1,0 +1,19 @@
+package avoidance;
+
+import lejos.robotics.RangeFinder;
+
+public class RangeFinderAdapter implements RangeFinder {
+
+	@Override
+	public float getRange() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float[] getRanges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -9,8 +9,6 @@ public class EV3IRBeacon {
 	public static void main(String[] args) {
 		LCD.clear();
 
-		LCD.drawString("EV3 IR Beacon", 0, 5);
-
 		// Get an instance of the IR EV3 sensor
 
 		final EV3IRSensor infraredSensor = new EV3IRSensor(SensorPort.S1);

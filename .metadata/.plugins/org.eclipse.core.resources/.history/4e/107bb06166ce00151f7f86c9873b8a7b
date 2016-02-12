@@ -1,0 +1,39 @@
+package avoidance;
+
+import lejos.hardware.lcd.LCD;
+import lejos.hardware.port.SensorPort;
+import lejos.hardware.sensor.EV3IRSensor;
+import lejos.hardware.sensor.EV3TouchSensor;
+import lejos.utility.Delay;
+
+
+public class ObstacleDetector extends Thread {
+
+	public float distance;
+	
+	final private EV3IRSensor distanceSensor = new EV3IRSensor(SensorPort.S2);
+			
+	float[] samples;
+
+	
+	public void Avoid() {
+		
+		distanceSensor.setCurrentMode(1);
+		
+		while (distance < 0.5) {
+		
+		int sampleSize = distanceSensor.sampleSize();
+		
+		float[] sample = new float[sampleSize];
+		
+		distanceSensor.fetchSample(sample,0);
+		
+		distance = sample[0];
+		
+		LCD.drawString("Distance : " + distance, 0, 0);
+		break;
+		}
+		
+		distanceSensor.close();
+	}
+}

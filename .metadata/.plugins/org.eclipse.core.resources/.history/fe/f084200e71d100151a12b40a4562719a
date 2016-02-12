@@ -1,0 +1,35 @@
+package avoidance;
+
+import lejos.robotics.navigation.DifferentialPilot;
+import lejos.robotics.objectdetection.Feature;
+import lejos.robotics.objectdetection.FeatureDetector;
+import lejos.robotics.objectdetection.FeatureListener;
+ 
+public class DetectedObjectListener implements FeatureListener {
+ 
+    private DifferentialPilot pilot;
+ 
+    public DetectedObjectListener(final DifferentialPilot pilot) {
+        this.pilot = pilot;
+    }
+ 
+    @Override
+    public void featureDetected(final Feature feature, final FeatureDetector detector) {
+        int range = (int)feature.getRangeReading().getRange();
+        if(range <= 10){
+            if(range <=3){
+                System.out.println("Recognized signal directly on front of me: exiting!");
+                System.exit(0);
+            }
+            System.out.print("Reached wall! Stopping...");
+            pilot.stop();
+            System.out.println("done!");
+            System.out.print("Rotating 90 degrees...");
+            pilot.rotate(90);
+            System.out.println("done!");
+            pilot.forward();
+        } else {
+            System.out.println("range: "+range);
+        }
+    }
+}
