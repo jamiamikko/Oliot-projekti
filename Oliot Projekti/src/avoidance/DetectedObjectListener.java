@@ -1,5 +1,6 @@
 package avoidance;
 
+import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.objectdetection.Feature;
@@ -27,14 +28,17 @@ public class DetectedObjectListener implements FeatureListener {
             }
             
             pilot.stop();
+            Button.LEDPattern(2);
+
             
             
             LCD.drawString("STOP!", 0, 0);
-            Delay.msDelay(2000);
-                 
-            pilot.rotate(180);
             
-            pilot.backward();
+            pilot.forward();
+            Delay.msDelay(2000);
+            pilot.stop();
+                 
+
         } else {
             System.out.println("range: "+range);
         }

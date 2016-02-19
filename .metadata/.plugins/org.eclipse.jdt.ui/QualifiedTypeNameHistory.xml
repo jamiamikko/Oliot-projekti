@@ -3,7 +3,12 @@
 <fullyQualifiedTypeName name="sensor.EV3IRBeacon"/>
 <fullyQualifiedTypeName name="sensor.InfraredSignalCheckerThread"/>
 <fullyQualifiedTypeName name="lejos.hardware.port.SensorPort"/>
-<fullyQualifiedTypeName name="lejos.hardware.lcd.LCD"/>
 <fullyQualifiedTypeName name="lejos.hardware.sensor.SensorModes"/>
 <fullyQualifiedTypeName name="lejos.hardware.sensor.EV3IRSensor"/>
+<fullyQualifiedTypeName name="lejos.robotics.RangeFinderAdaptor"/>
+<fullyQualifiedTypeName name="lejos.hardware.lcd.LCD"/>
+<fullyQualifiedTypeName name="lejos.utility.Delay"/>
+<fullyQualifiedTypeName name="motors.Motors"/>
+<fullyQualifiedTypeName name="motors.EV3IRBeacon"/>
+<fullyQualifiedTypeName name="motors.InfraredSignalCheckerThread"/>
 </qualifiedTypeNameHistroy>
