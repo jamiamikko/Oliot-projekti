@@ -19,6 +19,7 @@ linked.slave.color=180,215,255
 matchingTagIndicationColor=212,212,212
 occurrenceIndicationColor=212,212,212
 overrideIndicatorColor=180,207,205
+overviewRuler_migration=migrated_3.1
 printMarginColor=176,180,185
 searchResultHighlighting=true
 searchResultIndication=false
