@@ -22,6 +22,10 @@ public class Controller {
 	EV3LargeRegulatedMotor largeMotor;
 	EV3LargeRegulatedMotor largeMotor2;
 	EV3MediumRegulatedMotor largeMotor3;
+	/**
+	 * määritetään tarvittavat muuttujat
+	 * 
+	 */
 
 	public Controller() {
 	
@@ -31,6 +35,9 @@ public class Controller {
 		startohjaus();
 		startvaisto();
 	}
+	/**
+	 * määritetään moottorit,sekä käynnistetään startohjaus ja startvaisto metodit
+	 */
 
 	private void startohjaus() {
 		LCD.clear();
@@ -42,6 +49,9 @@ public class Controller {
 				largeMotor2, largeMotor3);
 		checkerThread.start();
 	}
+		/**
+	 	* luo checkerthread säikeen ja käynnistää sen
+		*/
 
 	private void startvaisto() {
 		final DifferentialPilot pilot = new DifferentialPilot(wheelDiameter, wheelDistance, largeMotor, largeMotor2);
@@ -57,4 +67,8 @@ public class Controller {
 		rangeFeatureDetector.addListener(detectedObjectListener);
 
 	}
+	/**
+	 * Luo Pilotin ja etäisyydenmittaus kuuntelijaolion
+	 *  sekä määrittää etäisyysmittarin ja antaen sille mittausväli/aikaväli määreet
+	 */
 }
