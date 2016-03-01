@@ -24,7 +24,7 @@ public class Controller {
 	EV3MediumRegulatedMotor largeMotor3;
 
 	public Controller() {
-		// TODO Auto-generated method stub
+	
 		largeMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 		largeMotor2 = new EV3LargeRegulatedMotor(MotorPort.D);
 		largeMotor3 = new EV3MediumRegulatedMotor(MotorPort.A);
@@ -36,7 +36,7 @@ public class Controller {
 		LCD.clear();
 		LCD.drawString("EV3 IR Beacon", 0, 5);
 
-		// Get an instance of the IR EV3 sensor
+		
 
 		InfraredSignalCheckerThread checkerThread = new InfraredSignalCheckerThread(infraredSensor2, largeMotor,
 				largeMotor2, largeMotor3);
@@ -45,7 +45,7 @@ public class Controller {
 
 	private void startvaisto() {
 		final DifferentialPilot pilot = new DifferentialPilot(wheelDiameter, wheelDistance, largeMotor, largeMotor2);
-		// final EV3IRSensor infraredSensor = new EV3IRSensor(SensorPort.S1);
+		
 
 		final RangeFinderAdaptor rangeFinderAdaptor = new RangeFinderAdaptor(infraredSensor.getDistanceMode());
 
