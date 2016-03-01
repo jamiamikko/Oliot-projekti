@@ -8,7 +8,10 @@ public class Start {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unused")
 		Controller c = new Controller();
-
+		/**
+		 * Luodaan uusi kontrolleri
+     		*
+     		*/
 	}
 
 }
