@@ -17,8 +17,10 @@ public class Controller {
 	protected final static int interval = 500;
 	protected final static double wheelDiameter = 30.0f;
 	protected final static double wheelDistance = 170.0;
+	
 	final EV3IRSensor infraredSensor = new EV3IRSensor(SensorPort.S1);
 	final EV3IRSensor infraredSensor2 = new EV3IRSensor(SensorPort.S4);
+	
 	EV3LargeRegulatedMotor largeMotor;
 	EV3LargeRegulatedMotor largeMotor2;
 	EV3MediumRegulatedMotor largeMotor3;
