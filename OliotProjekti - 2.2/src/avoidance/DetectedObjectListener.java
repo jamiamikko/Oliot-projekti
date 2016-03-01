@@ -10,19 +10,18 @@ import lejos.utility.Delay;
 
 public class DetectedObjectListener implements FeatureListener {
 
-	/**
-	 * Luodaan ja määritetään DetectedObjectListener pilotti.
-	 */
+	
 
 	private DifferentialPilot pilot;
 
 	public DetectedObjectListener(final DifferentialPilot pilot) {
 		this.pilot = pilot;
 	}
-
+	
 	/**
-	 * Uudelleen määritetään FeatureListener rajapinnan featureDetected metodi.
+	 * Luodaan ja määritetään DetectedObjectListener pilotti.
 	 */
+
 	
 	@Override
 	public void featureDetected(final Feature feature, final FeatureDetector detector) {
@@ -39,40 +38,43 @@ public class DetectedObjectListener implements FeatureListener {
 
 		if (range <= 30) {
 			
-			/**
-			 * Jos säde on pienempi kuin 3 cm, ohjelma pysäytetään.
-			 */
-			if (range <= 3) {
-				System.out.println("Recognized signal directly on front of me: exiting!");
-				System.exit(0);
-			}
 
-			/**
-			 * Etäisyyden ollessa riittävän pieni kauko-ohjaus keskeytetään.
-			 */
+			
 			
 			pilot.stop();
 			Button.LEDPattern(2);
 
 			LCD.drawString("STOP!", 0, 0);
-
+			
 			/**
-			 * Keskeytyksen jälkeen ohjelma liikuttaa robottia taaksepäin 
+			 * Etäisyyden ollessa riittävän pieni kauko-ohjaus keskeytetään.
 			 */
+
+			
 			
 			pilot.forward();
 			Delay.msDelay(2000);
 			pilot.stop();
 			
 			/**
+			 * Keskeytyksen jälkeen ohjelma liikuttaa robottia taaksepäin 
+			 */
+			
+			/**
 			 * Kauko-ohjausta voidaan jatkaa nyt normaalisti
 			 */
 
 		} else {
+			
+			System.out.println("range: " + range);
+			
 			/**
 			 * Else ehtona printataan controlleriin sensorin saama etäisyys
 			 */
-			System.out.println("range: " + range);
 		}
 	}
+	
+	/**
+	 * Uudelleen määritetään FeatureListener rajapinnan featureDetected metodi.
+	 */
 }
