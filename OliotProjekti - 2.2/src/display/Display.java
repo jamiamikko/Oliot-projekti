@@ -676,7 +676,11 @@ public class Display extends Thread{
 			(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, 
 			(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, 
 			(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, 
-			(byte) 0x00, (byte) 0x00, });		
+			(byte) 0x00, (byte) 0x00, });
+			
+	/**
+	 * bittikartat kaikille 4 nuolelle 
+	 */
 	
 	
            
@@ -697,6 +701,9 @@ public class Display extends Thread{
         gLCD.clear();
         gLCD.drawImage(reverseArrow, 40, 20, 0);		
 	}
+	/**
+	 * metodit eri nuolivaihtoehtoihin, joita kutsutaan muista luokista,tyhjentävät näytön ja keskittävät kuvan
+	 */
 
 }
 
