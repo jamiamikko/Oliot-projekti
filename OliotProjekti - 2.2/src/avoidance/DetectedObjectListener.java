@@ -26,20 +26,15 @@ public class DetectedObjectListener implements FeatureListener {
 	@Override
 	public void featureDetected(final Feature feature, final FeatureDetector detector) {
 		
-		/**
-		 * Määritetään etäisyysmuuttuja.
-		 */
+		
 		
 		int range = (int) feature.getRangeReading().getRange();
 		
 		/**
-		 * Kuuntelija toimii alle 30 cm säteellä.
+		 * Määritetään etäisyysmuuttuja.
 		 */
 
 		if (range <= 30) {
-			
-
-			
 			
 			pilot.stop();
 			Button.LEDPattern(2);
@@ -66,7 +61,7 @@ public class DetectedObjectListener implements FeatureListener {
 
 		} else {
 			
-			System.out.println("range: " + range);
+			System.out.println("Etäisyys: " + range);
 			
 			/**
 			 * Else ehtona printataan controlleriin sensorin saama etäisyys
