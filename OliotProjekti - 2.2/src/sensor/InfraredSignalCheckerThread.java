@@ -23,6 +23,13 @@ public class InfraredSignalCheckerThread extends Thread {
 
 	// Vastaanotetaan Controllerista sensori + moottorit ja osoitetaan ne
 	 
+	/**
+	 * Vastaanotetaan Controllerista sensori + moottorit ja osoitetaan ne
+	 * @param sensor
+	 * @param largeMotor
+	 * @param largeMotor2
+	 * @param largeMotor3
+	 */
 
 	public InfraredSignalCheckerThread(final EV3IRSensor sensor, EV3LargeRegulatedMotor largeMotor,
 			EV3LargeRegulatedMotor largeMotor2, EV3MediumRegulatedMotor largeMotor3) {
