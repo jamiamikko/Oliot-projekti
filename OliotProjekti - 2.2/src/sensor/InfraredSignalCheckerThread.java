@@ -4,136 +4,121 @@ import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
-import lejos.hardware.port.MotorPort;
 import lejos.hardware.sensor.EV3IRSensor;
-import lejos.hardware.sensor.SensorModes;
-import lejos.utility.Delay;
 import display.Display;
 
-
-
+/**
+ * Tama on luokka InfraredSignalCheckerThread, joka laajentaa Thread saikeen. Luokka huolehtii robotin liikkumiseen tarvittavista toiminnoista.
+ * @author jamiamikko
+ *
+ */
 
 public class InfraredSignalCheckerThread extends Thread {
+	// Maaritetaan tarvittavat muuttujat
+	 
+	private EV3IRSensor infraredSensor;
+	EV3LargeRegulatedMotor largeMotor;
+	EV3LargeRegulatedMotor largeMotor2;
+	EV3MediumRegulatedMotor largeMotor3;
 
-	
-    private EV3IRSensor infraredSensor;
-    EV3LargeRegulatedMotor largeMotor;
-    EV3LargeRegulatedMotor largeMotor2;
-    EV3MediumRegulatedMotor largeMotor3;
-    /**
-     * määritetään tarvittavat muuttujat
-     *
-     */
-    
-    
-    public InfraredSignalCheckerThread(final EV3IRSensor sensor, EV3LargeRegulatedMotor largeMotor, EV3LargeRegulatedMotor largeMotor2,EV3MediumRegulatedMotor largeMotor3){
-    	this.largeMotor=largeMotor;
-    	this.largeMotor3=largeMotor3;
-    	this.largeMotor2=largeMotor2;
-        this.infraredSensor = sensor;
-    }	
-    /**
-     *vastaanotetaan Controllerista sensori + moottorit ja osoitetaan ne muuttujiin
-     */
+	// Vastaanotetaan Controllerista sensori + moottorit ja osoitetaan ne
+	 
 
-    @Override
-    public void run() {
-    	
-    	
-    	largeMotor.setSpeed(800);
-    	largeMotor2.setSpeed(800);
-    	largeMotor3.setSpeed(800);
-    	/**
-    	 * aloitusnopeussuureet
-    	 */
-    	
-    	
+	public InfraredSignalCheckerThread(final EV3IRSensor sensor, EV3LargeRegulatedMotor largeMotor,
+			EV3LargeRegulatedMotor largeMotor2, EV3MediumRegulatedMotor largeMotor3) {
+		this.largeMotor = largeMotor;
+		this.largeMotor3 = largeMotor3;
+		this.largeMotor2 = largeMotor2;
+		this.infraredSensor = sensor;
+	}
 
-    	while(Button.ESCAPE.isUp()){
-            final int remoteCommand = infraredSensor.getRemoteCommand(0);
-            switch (remoteCommand){
-            /**
-        	 * sääntö joka pitää loopin päällä
-        	 * muuttaa kaukosäätimen komennon int muotoon
-        	 */
-            
-                case 1:
-                	largeMotor.backward();
-                	largeMotor2.backward();
-                	Button.LEDPattern(1);
-                	Display.DrawArrowForward();
+	/**
+	 * Uudelleen maaritetaan run metodi.
+	 */
 
-                    break;
-                    /**
-                     * moottorit eteenpäin,vihreä led,nuoli ylös
-                     */
-                    
-              
-                case 2:
-                	largeMotor.forward();
-                	largeMotor2.forward();
-                	Button.LEDPattern(8);
-                	Display.DrawArrowReverse();
-                	
-                	
-                	
-                	break;
-                	/**
-                     * moottorit taaksepäin,punainen vilkkuva led,nuoli alas
-                     */
-                	
-                case 3:
-                	
-                	
-                	largeMotor2.setSpeed(200);
-                	largeMotor3.rotate(10);
-                	Display.DrawArrowLeft();
-                	
-                	
-                	
-                	break;
-                	/**
-                     * kääntää kääntömoottorie 10 astetta vasempaan,hidastaa vasenta moottoria,nuoli vasempaan 
-                     */
-                	
-                case 4:
-                	largeMotor.setSpeed(200);
-                	largeMotor3.rotate(-10);
-                	Display.DrawArrowRight();
-                	
-                	break;
-                	/**
-                     * kääntää kääntömoottoria 10 astetta oikeaan,hidastaa oikeaa moottoria,nuoli oikeaan
-                     */
-                	
-                case 9:
-                	largeMotor2.stop(true);
-                	largeMotor.stop(true);
-                	Button.LEDPattern(0);
-                	LCD.clear();
+	@Override
+	public void run() {
+		// Aloitusnopeussuureet
+		 
+		largeMotor.setSpeed(800);
+		largeMotor2.setSpeed(800);
+		largeMotor3.setSpeed(800);
+		
 
-                	break;
-                	/**
-                	 * pysäyttää moottorit,sammuttaa ledit,tyhjentää näytön
-                	 */
-                	
-                default:
-                	//largeMotor2.stop(true);
-                	//largeMotor.stop(true);
-                	largeMotor3.stop(true);
-                	largeMotor3.rotateTo(0);
-                	largeMotor.setSpeed(800);
-                	largeMotor2.setSpeed(800);
-                	largeMotor3.setSpeed(800);
-                	
-                	/**
-                	 * palauttaa moottorien nopeudet vakioiksi,sekä palauttaa kääntömoottorin lähtöasentoon 
-                	 */
-                	
+		while (Button.ESCAPE.isUp()) {
+			
+			// Saanto joka pitaa loopin paalla muuttaa kaukosaatimen komennon int muotoon
+			
+			final int remoteCommand = infraredSensor.getRemoteCommand(0);
+			switch (remoteCommand) {
+			
 
-                	
-            }
-        }
-    }    
-    
+			case 1:
+				// Moottorit eteenpain, vihrea led, nuoli ylos
+				
+				largeMotor.backward();
+				largeMotor2.backward();
+				Button.LEDPattern(1);
+				Display.DrawArrowForward();
+
+				break;
+			
+
+			case 2:
+				// Moottorit taaksepain, punainen vilkkuva led, nuoli alas
+				 
+
+				largeMotor.forward();
+				largeMotor2.forward();
+				Button.LEDPattern(8);
+				Display.DrawArrowReverse();
+
+				break;
+			
+			case 3:
+				// Kaantaa kaantomoottorie 10 astetta vasempaan, hidastaa vasenta moottoria, nuoli vasempaan
+				 
+				largeMotor2.setSpeed(200);
+				largeMotor3.rotate(10);
+				Display.DrawArrowLeft();
+
+				break;
+			
+
+			case 4:
+				// Kaantaa kaantomoottoria 10 astetta oikeaan, hidastaa oikeaa moottoria, nuoli oikeaan
+				
+				largeMotor.setSpeed(200);
+				largeMotor3.rotate(-10);
+				Display.DrawArrowRight();
+
+				break;
+			
+
+			case 9:
+				
+				// Pysayttaa moottorit, sammuttaa ledit, tyhjentaa nayton
+				
+				largeMotor2.stop(true);
+				largeMotor.stop(true);
+				Button.LEDPattern(0);
+				LCD.clear();
+
+				break;
+			
+
+			default:
+				// Palauttaa moottorien nopeudet vakioiksi, seka palauttaa kaantomoottorin lahtoasentoon
+				
+				largeMotor3.stop(true);
+				largeMotor3.rotateTo(0);
+				largeMotor.setSpeed(800);
+				largeMotor2.setSpeed(800);
+				largeMotor3.setSpeed(800);
+
+
+			}
+		}
+	}
+
 }
