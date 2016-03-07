@@ -13,7 +13,7 @@ import lejos.robotics.objectdetection.FeatureListener;
 import lejos.robotics.objectdetection.RangeFeatureDetector;
 
 /**
- * Tama on luokka Dontroller, joka toimii toiminnot yhdistävänä luokkana.
+ * Tama on luokka Controller, joka toimii toiminnot yhdistavana luokkana.
  * @author jamiamikko
  *
  */
@@ -31,11 +31,12 @@ public class Controller {
 	EV3LargeRegulatedMotor largeMotor2;
 	EV3MediumRegulatedMotor largeMotor3;
 
-	
-
+/**
+ * Maaritetaan moottorit,seka kaynnistetaan startohjaus ja startvaisto metodit
+ */
 	public Controller() {
 		
-		// Maaritetaan moottorit,sekä kaynnistetaan startohjaus ja startvaisto metodit
+		// Maaritetaan moottorit,seka kaynnistetaan startohjaus ja startvaisto metodit
 
 		largeMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 		largeMotor2 = new EV3LargeRegulatedMotor(MotorPort.D);
