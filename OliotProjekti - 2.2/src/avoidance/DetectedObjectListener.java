@@ -8,68 +8,71 @@ import lejos.robotics.objectdetection.FeatureDetector;
 import lejos.robotics.objectdetection.FeatureListener;
 import lejos.utility.Delay;
 
+/**
+ * Tämä on luokka DetectedObjectListener, joka huolehtii esteiden havaitsemisesta ja vaistamisesta. Luokka toteuttaa FeatureListener rajapinnan, joka ilmoittaa etaisyyksia ja kulmia.
+ * @author jamiamikko
+ *
+ */
+
 public class DetectedObjectListener implements FeatureListener {
 
+	// Luodaan ja maaritetaan DetectedObjectListener pilotti.
+	 
 	
-
 	private DifferentialPilot pilot;
 
 	public DetectedObjectListener(final DifferentialPilot pilot) {
 		this.pilot = pilot;
 	}
-	
+
 	/**
-	 * Luodaan ja määritetään DetectedObjectListener pilotti.
+	 * Uudelleen maaritetaan FeatureListener rajapinnan featureDetected metodi.
 	 */
 
-	
 	@Override
 	public void featureDetected(final Feature feature, final FeatureDetector detector) {
 		
-		
-		
+		// Maaritetaan etaisyysmuuttuja.
+		 
 		int range = (int) feature.getRangeReading().getRange();
-		
-		/**
-		 * Määritetään etäisyysmuuttuja.
-		 */
+
 
 		if (range <= 30) {
 			
+			// Jos sade on pienempi kuin 3 cm, ohjelma pysaytetaan kokonaan.
+			 
+			if (range <= 3) {
+				System.out.println("Recognized signal directly on front of me: exiting!");
+				System.exit(0);
+			}
+			
+			// Etaisyyden ollessa riittävän pieni kauko-ohjaus keskeytetaan.
+
 			pilot.stop();
 			Button.LEDPattern(2);
 
-			LCD.drawString("STOP!", 0, 0);
+			LCD.drawString("STOP!", 0, 0);			
 			
-			/**
-			 * Etäisyyden ollessa riittävän pieni kauko-ohjaus keskeytetään.
-			 */
-
 			
+			// Keskeytyksen jalkeen ohjelma liikuttaa robottia taaksepain
+			 
 			
 			pilot.forward();
 			Delay.msDelay(2000);
 			pilot.stop();
-			
-			/**
-			 * Keskeytyksen jälkeen ohjelma liikuttaa robottia taaksepäin 
-			 */
-			
-			/**
-			 * Kauko-ohjausta voidaan jatkaa nyt normaalisti
-			 */
+
+			// Kauko-ohjausta voidaan jatkaa nyt normaalisti
+			 
 
 		} else {
 			
+			// Else ehtona printataan controlleriin sensorin saama etaisyys
+
 			System.out.println("Etäisyys: " + range);
+
 			
-			/**
-			 * Else ehtona printataan controlleriin sensorin saama etäisyys
-			 */
 		}
 	}
+
 	
-	/**
-	 * Uudelleen määritetään FeatureListener rajapinnan featureDetected metodi.
-	 */
 }
