@@ -14,7 +14,7 @@ import lejos.robotics.objectdetection.RangeFeatureDetector;
 
 /**
  * Tama on luokka Controller, joka toimii toiminnot yhdistavana luokkana.
- * @author jamiamikko
+ * @author markustn
  *
  */
 
