@@ -5,7 +5,7 @@ import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.lcd.Image;
 
 /**
- * Tämä on luokka Display, joka luo suuntaa antavat graafiset kuvat ja tulostaa ne LCD naytolle.
+ * Tama on luokka Display, joka luo suuntaa antavat graafiset kuvat ja tulostaa ne LCD naytolle.
  * @author jamiamikko
  *
  */
