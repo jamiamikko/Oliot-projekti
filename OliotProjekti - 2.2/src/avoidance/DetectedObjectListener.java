@@ -9,7 +9,7 @@ import lejos.robotics.objectdetection.FeatureListener;
 import lejos.utility.Delay;
 
 /**
- * Tämä on luokka DetectedObjectListener, joka huolehtii esteiden havaitsemisesta ja vaistamisesta. Luokka toteuttaa FeatureListener rajapinnan, joka ilmoittaa etaisyyksia ja kulmia.
+ * Tama on luokka DetectedObjectListener, joka huolehtii esteiden havaitsemisesta ja vaistamisesta. Luokka toteuttaa FeatureListener rajapinnan, joka ilmoittaa etaisyyksia ja kulmia.
  * @author jamiamikko
  *
  */
@@ -21,6 +21,11 @@ public class DetectedObjectListener implements FeatureListener {
 	
 	private DifferentialPilot pilot;
 
+	/**
+	 * Luodaan ja maaritetaan DetectedObjectListener pilotti.
+	 * @param pilot
+	 */
+	
 	public DetectedObjectListener(final DifferentialPilot pilot) {
 		this.pilot = pilot;
 	}
