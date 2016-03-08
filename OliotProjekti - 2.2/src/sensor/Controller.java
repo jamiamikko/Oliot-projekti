@@ -21,9 +21,9 @@ import lejos.robotics.objectdetection.RangeFeatureDetector;
 public class Controller {
 	// Maaritetaan tarvittavat muuttujat
 	
-	protected final static float maxDistance = 1000.0f;
+	protected final static float maxDistance = 1000.0;
 	protected final static int interval = 500;
-	protected final static double wheelDiameter = 30.0f;
+	protected final static double wheelDiameter = 30.0;
 	protected final static double wheelDistance = 170.0;
 	final EV3IRSensor infraredSensor = new EV3IRSensor(SensorPort.S1);
 	final EV3IRSensor infraredSensor2 = new EV3IRSensor(SensorPort.S4);
