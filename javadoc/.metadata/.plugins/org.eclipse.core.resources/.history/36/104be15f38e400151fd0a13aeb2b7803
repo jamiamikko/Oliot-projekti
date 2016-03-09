@@ -1,0 +1,130 @@
+package sensor;
+
+import lejos.hardware.Button;
+import lejos.hardware.lcd.LCD;
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.motor.EV3MediumRegulatedMotor;
+import lejos.hardware.sensor.EV3IRSensor;
+import display.Display;
+
+/**
+ * Tama on luokka InfraredSignalCheckerThread, joka laajentaa Thread saikeen. Luokka huolehtii robotin liikkumiseen tarvittavista toiminnoista.
+ * @author jamiamikko
+ *
+ */
+
+public class InfraredSignalCheckerThread extends Thread {
+	//Maaritetaan tarvittavat muuttujat
+	 
+	private EV3IRSensor infraredSensor;
+	EV3LargeRegulatedMotor largeMotor;
+	EV3LargeRegulatedMotor largeMotor2;
+	EV3MediumRegulatedMotor largeMotor3;
+
+	//Vastaanotetaan Controllerista sensori + moottorit ja osoitetaan ne
+	 
+
+	public InfraredSignalCheckerThread(final EV3IRSensor sensor, EV3LargeRegulatedMotor largeMotor,
+			EV3LargeRegulatedMotor largeMotor2, EV3MediumRegulatedMotor largeMotor3) {
+		this.largeMotor = largeMotor;
+		this.largeMotor3 = largeMotor3;
+		this.largeMotor2 = largeMotor2;
+		this.infraredSensor = sensor;
+	}
+
+	/**
+	 * Uudelleen maaritetaan run metodi.
+	 */
+
+	@Override
+	public void run() {
+		// Aloitusnopeussuureet
+		 
+		largeMotor.setSpeed(800);
+		largeMotor2.setSpeed(800);
+		largeMotor3.setSpeed(800);
+		
+
+		while (Button.ESCAPE.isUp()) {
+			
+			//Saanto joka pitaa loopin paalla muuttaa kaukosaatimen komennon int muotoon
+			
+			final int remoteCommand = infraredSensor.getRemoteCommand(0);
+			switch (remoteCommand) {
+			
+
+			case 1:
+				//Moottorit eteenpain, vihrea led, nuoli ylos
+				
+				largeMotor.backward();
+				largeMotor2.backward();
+				Button.LEDPattern(1);
+				Display.DrawArrowForward();
+
+				break;
+			
+
+			case 2:
+				//Moottorit taaksepain, punainen vilkkuva led, nuoli alas
+				 
+
+				largeMotor.forward();
+				largeMotor2.forward();
+				Button.LEDPattern(8);
+				Display.DrawArrowReverse();
+
+				break;
+			
+			case 3:
+				//Kaantaa kaantomoottorie 10 astetta vasempaan, hidastaa vasenta moottoria, nuoli vasempaan
+				 
+				largeMotor2.setSpeed(200);
+				largeMotor3.rotate(10);
+				Display.DrawArrowLeft();
+
+				break;
+			
+
+			case 4:
+				/**
+				 * Kaantaa kaantomoottoria 10 astetta oikeaan, hidastaa oikeaa
+				 * moottoria, nuoli oikeaan
+				 */
+				largeMotor.setSpeed(200);
+				largeMotor3.rotate(-10);
+				Display.DrawArrowRight();
+
+				break;
+			
+
+			case 9:
+				
+				/**
+				 * Pysayttaa moottorit, sammuttaa ledit, tyhjentaa nayton
+				 */
+				largeMotor2.stop(true);
+				largeMotor.stop(true);
+				Button.LEDPattern(0);
+				LCD.clear();
+
+				break;
+			
+
+			default:
+				/**
+				 * Palauttaa moottorien nopeudet vakioiksi, seka palauttaa
+				 * kaantomoottorin lahtoasentoon
+				 */
+			
+				largeMotor3.stop(true);
+				largeMotor3.rotateTo(0);
+				largeMotor.setSpeed(800);
+				largeMotor2.setSpeed(800);
+				largeMotor3.setSpeed(800);
+
+
+			}
+		}
+	}
+
+}
