@@ -12,50 +12,60 @@ import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.objectdetection.FeatureListener;
 import lejos.robotics.objectdetection.RangeFeatureDetector;
 
+/**
+ * Tama on luokka Controller, joka toimii toiminnot yhdistavana luokkana.
+ * @author markustn
+ *
+ */
+
 public class Controller {
-	protected final static float maxDistance = 1000.0f;
+	// Maaritetaan tarvittavat muuttujat
+	
+	protected final static float maxDistance = 1000.0;
 	protected final static int interval = 500;
-	protected final static double wheelDiameter = 30.0f;
+	protected final static double wheelDiameter = 30.0;
 	protected final static double wheelDistance = 170.0;
 	final EV3IRSensor infraredSensor = new EV3IRSensor(SensorPort.S1);
 	final EV3IRSensor infraredSensor2 = new EV3IRSensor(SensorPort.S4);
 	EV3LargeRegulatedMotor largeMotor;
 	EV3LargeRegulatedMotor largeMotor2;
 	EV3MediumRegulatedMotor largeMotor3;
-	/**
-	 * määritetään tarvittavat muuttujat
-	 * 
-	 */
 
+/**
+ * Maaritetaan moottorit,seka kaynnistetaan startohjaus ja startvaisto metodit
+ */
 	public Controller() {
-	
+		
+		// Maaritetaan moottorit,seka kaynnistetaan startohjaus ja startvaisto metodit
+
 		largeMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 		largeMotor2 = new EV3LargeRegulatedMotor(MotorPort.D);
 		largeMotor3 = new EV3MediumRegulatedMotor(MotorPort.A);
 		startohjaus();
 		startvaisto();
 	}
+
 	/**
-	 * määritetään moottorit,sekä käynnistetään startohjaus ja startvaisto metodit
+	 * Luodaan checkerthread saie ja kaynnistetaan se
 	 */
+	
 
 	private void startohjaus() {
 		LCD.clear();
-		LCD.drawString("EV3 IR Beacon", 0, 5);
-
-		
+		LCD.drawString("Welcome!", 0, 5);
 
 		InfraredSignalCheckerThread checkerThread = new InfraredSignalCheckerThread(infraredSensor2, largeMotor,
 				largeMotor2, largeMotor3);
 		checkerThread.start();
 	}
-		/**
-	 	* luo checkerthread säikeen ja käynnistää sen
-		*/
+
+	/**
+	 * Luodaan Pilotti ja etaisyydenmittaus kuuntelijaolio sekä maaritetaan
+	 * etaisyysmittari ja annetaan sille mittausvali/aikavali maareet
+	 */
 
 	private void startvaisto() {
 		final DifferentialPilot pilot = new DifferentialPilot(wheelDiameter, wheelDistance, largeMotor, largeMotor2);
-		
 
 		final RangeFinderAdaptor rangeFinderAdaptor = new RangeFinderAdaptor(infraredSensor.getDistanceMode());
 
@@ -67,8 +77,5 @@ public class Controller {
 		rangeFeatureDetector.addListener(detectedObjectListener);
 
 	}
-	/**
-	 * Luo Pilotin ja etäisyydenmittaus kuuntelijaolion
-	 *  sekä määrittää etäisyysmittarin ja antaen sille mittausväli/aikaväli määreet
-	 */
+	
 }
